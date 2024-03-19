@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/sortMenu"
+        android:icon="@drawable/sort_icon"
+        android:title="Sort"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/deleteMenu"
+        android:icon="@drawable/delete_icon"
+        android:title="Delete All"
+        app:showAsAction="never">
+    </item>
+
+   <!-- showAsAction is used to tell whether if we want the menu to be visible on toolbar or hidden
+    specifying - "always" will show the menu always in the toolbar
+    specifying - "never" will hide the menu inside a pop up dialog
+    specifying - "ifRoom" will show the menu on toolbar only if space is available if not it will hide it in a pop up dialog-->
+
+</menu>
+
+
+
+
