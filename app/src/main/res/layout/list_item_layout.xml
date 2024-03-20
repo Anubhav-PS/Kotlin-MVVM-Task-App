@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="task"
+            type="com.anubhav.mytasks.models.TaskItem" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="6dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/taskName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="6dp"
+            android:text="@{task.taskName}"
+            android:textColor="@color/black"
+            tools:text = "Kotlin MVVM at VIT Chennai"
+            android:textSize="18sp">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/taskPriority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginVertical="6dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="@{String.valueOf(task.priority)}"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="Very Important"
+            app:chipBackgroundColor="@android:color/holo_blue_dark"
+            app:chipCornerRadius="50dp"
+            app:chipStrokeWidth="0dp">
+
+        </com.google.android.material.chip.Chip>
+
+    </LinearLayout>
+</layout>

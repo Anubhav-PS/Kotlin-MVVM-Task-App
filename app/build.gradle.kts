@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    //add this plugin to enable data binding
     id("kotlin-kapt")
 }
 
@@ -34,9 +36,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
+    //add this entire block to include data binding feature
     buildFeatures {
         dataBinding = true
     }
+
+
 }
 
 dependencies {

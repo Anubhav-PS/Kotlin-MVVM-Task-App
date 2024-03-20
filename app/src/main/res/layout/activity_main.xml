@@ -10,18 +10,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".MainActivity">
+        android:background="#E9F7F9"
+        tools:context=".ui.MainActivity">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:background="@android:color/holo_blue_dark"
-            app:titleTextColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -30,7 +30,8 @@
             app:layout_constraintBottom_toTopOf="@id/addButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:listitem="@layout/list_item_layout">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -38,12 +39,12 @@
             android:id="@+id/addButton"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:textColor="@color/white"
-            android:text="Add New Task"
-            app:cornerRadius="4dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="4dp"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="Add New Task"
+            android:textColor="@color/white"
+            app:cornerRadius="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
