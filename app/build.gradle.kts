@@ -4,6 +4,8 @@ plugins {
 
     //add this plugin to enable data binding
     id("kotlin-kapt")
+    //add ksp this to allow room
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -60,6 +62,11 @@ dependencies {
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
+    //room
+    implementation ("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
+    // Koin (Dependency injection)
+    implementation("io.insert-koin:koin-android:3.6.0-wasm-alpha2")
 
 }

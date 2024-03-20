@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="22dp"
+        android:background="@color/white"
+        android:paddingVertical="22dp"
+        tools:context=".ui.AddNewTaskFragment">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="New Task"
+            android:textSize="22sp">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/taskNameInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:hint="Enter Task Name">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/taskNameInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/taskPriorityInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:hint="Select Priority">
+
+
+            <AutoCompleteTextView
+                android:id="@+id/taskPriorityInputAutoComplete"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Save"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/black"
+            app:cornerRadius="4dp">
+
+        </com.google.android.material.button.MaterialButton>
+
+
+    </LinearLayout>
+</layout>

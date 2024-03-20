@@ -1,7 +1,6 @@
 package com.anubhav.mytasks.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -15,6 +14,8 @@ import com.anubhav.mytasks.R
 import com.anubhav.mytasks.databinding.ActivityMainBinding
 import com.anubhav.mytasks.models.TaskItem
 import com.anubhav.mytasks.ui.recyclerviewadapter.RecyclerViewAdapter
+import com.anubhav.mytasks.viewmodels.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
     //create a global empty list to store the data to be displayed in recycler view
     private val taskList: MutableList<TaskItem> = mutableListOf()
     private val recyclerViewAdapter = RecyclerViewAdapter(taskList)
+
+    //main view model
+    private val viewModel: MainViewModel by viewModel<MainViewModel>()
 
     //when the activity xml is created
     // instructions to execute when the xml is created
@@ -47,11 +51,13 @@ class MainActivity : AppCompatActivity() {
                     // the menu id's you want to check
                     R.id.sortMenu -> {
                         // write the instructions you want to execute when this menu is pressed
+                        viewModel.getAllTaskInAscendingOrder()
                         return true
                     }
 
                     R.id.deleteMenu -> {
                         // write the instructions you want to execute when this menu is pressed
+                        viewModel.deleteAllTaskItem()
                         return true
                     }
                 }
@@ -60,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         }, this) //this -> is to say or indicate who is the owner of this toolbar
         // here this is referring to the Main Activity class
         // since main activity is the owner or the place where our toolbar menu are present
-
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = recyclerViewAdapter
 
@@ -68,13 +73,22 @@ class MainActivity : AppCompatActivity() {
             //here you can write the instructions that need to be executed when the button is clicked
             //here we are displaying a message (toast) to the user with a message.
             // (Run the app to understand and find out how a toast looks like)
-            Toast.makeText(this, "Hello guys welcome to android kotlin event", Toast.LENGTH_LONG).show()
-            val taskItem1 = TaskItem("Conduct kotlin mvvm", 1);
-            taskList.add(taskItem1)
-            Log.i("MY-TESTING","The contents in the list are $taskList")
+            Toast.makeText(this, "Hello guys welcome to android kotlin event", Toast.LENGTH_LONG)
+                .show()
+            //open the bottom fragment to add new task
+            val addNewTaskFragment = AddNewTaskFragment()
+            addNewTaskFragment.show(supportFragmentManager, "Add New Fragment")
+        }
+
+        viewModel.allTaskItem.observe(this) {
+            recyclerViewAdapter.taskList = it
             recyclerViewAdapter.notifyDataSetChanged()
         }
 
+        viewModel.sortedTaskList.observe(this){
+            recyclerViewAdapter.taskList = it
+            recyclerViewAdapter.notifyDataSetChanged()
+        }
 
     }
 }

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anubhav.mytasks.databinding.ListItemLayoutBinding
 import com.anubhav.mytasks.models.TaskItem
 
-class RecyclerViewAdapter(val taskList: List<TaskItem>) :
+class RecyclerViewAdapter(var taskList: List<TaskItem>) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ListItemLayoutBinding) :
