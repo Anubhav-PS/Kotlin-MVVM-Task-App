@@ -1,39 +1,59 @@
 package com.anubhav.mytasks.ui.recyclerviewadapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.anubhav.mytasks.databinding.ListItemLayoutBinding
+import com.anubhav.mytasks.R
 import com.anubhav.mytasks.models.TaskItem
+import com.anubhav.mytasks.ui.interfaces.OnTaskContainerClicked
+import com.google.android.material.chip.Chip
+import com.google.android.material.textview.MaterialTextView
 
-class RecyclerViewAdapter(var taskList: List<TaskItem>) :
+class RecyclerViewAdapter(
+    var taskList: List<TaskItem>,
+    private val onTaskContainerClicked: OnTaskContainerClicked
+) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-    class ViewHolder(private val binding: ListItemLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(taskItem: TaskItem) {
-            binding.task = taskItem
-            binding.executePendingBindings()
-        }
+        val container = itemView.findViewById<LinearLayout>(R.id.taskContainerLayout)
+        val taskNameTextView = itemView.findViewById<MaterialTextView>(R.id.taskName)
+        val taskPriorityTextView = itemView.findViewById<Chip>(R.id.taskPriority)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ListItemLayoutBinding.inflate(layoutInflater, parent, false)
-        return ViewHolder(binding)
-    }
-
-    override fun getItemCount(): Int {
-        return taskList.size
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item_layout, parent, false)
+        return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //this is where we provide individual item data in the list to be bound to the layout file
-        val item = taskList[position]
-        holder.bind(item)
+        // Bind data to ViewHolder
+        val taskItem = taskList[position]
+        holder.taskNameTextView.text = taskItem.taskName
+        holder.container.setOnClickListener {
+            onTaskContainerClicked.onItemClick(taskItem)
+        }
+        val priorityInIntFormat = taskItem.priority
+        val priorityInStringFormat = when (priorityInIntFormat) {
+            1 -> "High"
+            2 -> "Medium"
+            3 -> "Low"
+
+            else -> {
+                " "
+            }
+        }
+        holder.taskPriorityTextView.text = priorityInStringFormat
     }
 
+    override fun getItemCount(): Int {
+        // return the size of task list
+        return taskList.size
+    }
 
 }

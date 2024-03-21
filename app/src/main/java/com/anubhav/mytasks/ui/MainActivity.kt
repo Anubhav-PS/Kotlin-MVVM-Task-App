@@ -13,18 +13,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anubhav.mytasks.R
 import com.anubhav.mytasks.databinding.ActivityMainBinding
 import com.anubhav.mytasks.models.TaskItem
+import com.anubhav.mytasks.ui.interfaces.OnTaskContainerClicked
 import com.anubhav.mytasks.ui.recyclerviewadapter.RecyclerViewAdapter
 import com.anubhav.mytasks.viewmodels.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , OnTaskContainerClicked{
 
     //create a binding instance of activity main binding
     private lateinit var binding: ActivityMainBinding
 
     //create a global empty list to store the data to be displayed in recycler view
     private val taskList: MutableList<TaskItem> = mutableListOf()
-    private val recyclerViewAdapter = RecyclerViewAdapter(taskList)
+    private val recyclerViewAdapter = RecyclerViewAdapter(taskList,this)
 
     //main view model
     private val viewModel: MainViewModel by viewModel<MainViewModel>()
@@ -90,5 +91,9 @@ class MainActivity : AppCompatActivity() {
             recyclerViewAdapter.notifyDataSetChanged()
         }
 
+    }
+
+    override fun onItemClick(taskItem: TaskItem) {
+        Toast.makeText(this,"Task selected is ${taskItem.taskName}",Toast.LENGTH_LONG).show()
     }
 }
